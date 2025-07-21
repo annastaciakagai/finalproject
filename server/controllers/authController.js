@@ -68,12 +68,13 @@ if (role === 'admin' || role === 'driver') {
     }
 
     const token = jwt.sign(
-        { id: user._id, role: user.role },
+        { userId: user._id, role: user.role },
         process.env.JWT_SECRET,
         { expiresIn: '1d' }
     );
 
-    res.json({ user, token });    } catch (error) {
+    res.json({ token, user: { id: user._id, role: user.role, name: user.name } });
+    } catch (error) {
             res.status(400).json({ error: error.message });
         }
     };

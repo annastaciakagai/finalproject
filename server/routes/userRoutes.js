@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const authController= require('../controllers/authController');
 const userController = require('../controllers/userController');
+const auth = require('../middleware/auth');
 const { verifyToken } = require('../middleware/auth');
 
 router.post('/signup', authController.signup);
@@ -16,4 +17,5 @@ router.get('/traders', userController.getTraders);
 router.post('/traders',verifyToken(['admin', 'driver']), userController.createTrader);
 
 router.post('/driver-login', authController.driverLogin);
+router.get('/profile', auth, userController.getProfile);
 module.exports = router;

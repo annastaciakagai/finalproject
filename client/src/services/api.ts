@@ -1,10 +1,10 @@
 import axios from 'axios';
 import { getToken } from '@/utils/auth';
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
 const api = axios.create({
-  baseURL: API_URL,
+  baseURL: API_BASE_URL,
   headers: {
     'Content-Type': 'application/json'
   }
@@ -34,5 +34,24 @@ api.interceptors.response.use(
     return Promise.reject(error);
   }
 );
+// Example: Register user
+export async function registerUser(data: any) {
+  const response = await fetch(`${API_BASE_URL}/api/users/register`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data),
+  });
+  return response.json();
+}
+
+// Example: Login user
+export async function loginUser(data: any) {
+  const response = await fetch(`${API_BASE_URL}/api/users/login`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data),
+  });
+  return response.json();
+}
 
 export default api;

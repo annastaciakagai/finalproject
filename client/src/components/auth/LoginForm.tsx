@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { setToken, setUserInfo } from '@/utils/auth';
+import { loginUser } from '@/services/api';
 
 interface LoginFormProps {
   userType: 'farmer' | 'trader' | 'driver' | 'admin';

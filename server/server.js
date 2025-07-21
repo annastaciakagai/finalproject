@@ -8,14 +8,21 @@ dotenv.config();
 connectDB();
 
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: 'http://localhost:5173', // or '*', or your frontend URL
+  credentials: true
+}));
 app.use(express.json());
 
 const userRoutes = require('./routes/userRoutes');
 const produceRoutes = require('./routes/produceRoutes');
+const collectionEventsRoutes = require('./routes/collectionEventsRoutes');
+const collectionPointsRoutes = require('./routes/collectionPointsRoutes');
 
 app.use('/api/users', userRoutes);
 app.use('/api/produce', produceRoutes);
+app.use('/api/collection-events', collectionEventsRoutes);
+app.use('/api/collection-points', collectionPointsRoutes);
 
 app.use((err, req, res, next) => {
   console.error(err);
