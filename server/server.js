@@ -16,13 +16,13 @@ app.use(express.json());
 
 const userRoutes = require('./routes/userRoutes');
 const produceRoutes = require('./routes/produceRoutes');
-const collectionEventsRoutes = require('./routes/collectionEventsRoutes');
-const collectionPointsRoutes = require('./routes/collectionPointsRoutes');
+// const collectionEventsRoutes = require('./routes/collectionEventsRoutes');
+// const collectionPointsRoutes = require('./routes/collectionPointsRoutes');
 
 app.use('/api/users', userRoutes);
 app.use('/api/produce', produceRoutes);
-app.use('/api/collection-events', collectionEventsRoutes);
-app.use('/api/collection-points', collectionPointsRoutes);
+// app.use('/api/collection-events', collectionEventsRoutes);
+// app.use('/api/collection-points', collectionPointsRoutes);
 
 app.use((err, req, res, next) => {
   console.error(err);
