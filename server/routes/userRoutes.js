@@ -3,19 +3,22 @@ const router = express.Router();
 const authController= require('../controllers/authController');
 const userController = require('../controllers/userController');
 const auth = require('../middleware/auth');
-const { verifyToken } = require('../middleware/auth');
 
-router.post('/signup', authController.signup);
+// Authentication routes
+router.post('/register', authController.register);
 router.post('/login', authController.login);
 
-//farmer
+// User management routes
 router.post('/farmers', userController.createFarmer);
-router.get('/farmers', verifyToken(['admin', 'driver']), userController.getFarmers);
+router.get('/farmers', auth, userController.getFarmers);
 
-//Trader
+// Trader routes
 router.get('/traders', userController.getTraders);
-router.post('/traders',verifyToken(['admin', 'driver']), userController.createTrader);
+router.post('/traders', auth, userController.createTrader);
 
-router.post('/driver-login', authController.driverLogin);
-router.get('/profile', auth, userController.getProfile);
+// Protected routes
+router.get('/profile', auth, (req, res) => {
+  res.json({ user: req.user });
+});
+
 module.exports = router;

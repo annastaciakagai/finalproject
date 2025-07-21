@@ -7,6 +7,9 @@ const UserSchema = new mongoose.Schema({
     farmerId:{type:String, sparse: true, unique:true},
     password:{type:String, required:true, select:false},
     phone:{type:String, required: true, unique: true},
+    email:{type:String, sparse: true},
+    businessName:{type:String},
+    businessType:{type:String},
 
     role: {
         type:String,
